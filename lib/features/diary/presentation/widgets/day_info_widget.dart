@@ -3,7 +3,10 @@ import 'package:intl/intl.dart';
 import 'package:opennutritracker/core/domain/entity/intake_entity.dart';
 import 'package:opennutritracker/core/domain/entity/tracked_day_entity.dart';
 import 'package:opennutritracker/core/domain/entity/user_activity_entity.dart';
+import 'package:opennutritracker/core/domain/usecase/get_user_usecase.dart';
 import 'package:opennutritracker/core/presentation/widgets/activity_vertial_list.dart';
+import 'package:opennutritracker/core/utils/locator.dart';
+import 'package:opennutritracker/features/nutrition/presentation/micronutrient_summary_screen.dart';
 import 'package:opennutritracker/core/presentation/widgets/copy_or_delete_dialog.dart';
 import 'package:opennutritracker/core/presentation/widgets/copy_dialog.dart';
 import 'package:opennutritracker/core/presentation/widgets/delete_dialog.dart';
@@ -114,6 +117,7 @@ class DayInfoWidget extends StatelessWidget {
                   )
                 : const SizedBox(),
             const SizedBox(height: 8.0),
+            _buildMicronutrientButton(context),
             ActivityVerticalList(
                 day: selectedDay,
                 title: S.of(context).activityLabel,
@@ -182,6 +186,39 @@ class DayInfoWidget extends StatelessWidget {
           ],
         )
       ],
+    );
+  }
+
+  Widget _buildMicronutrientButton(BuildContext context) {
+    final allIntakes = [
+      ...breakfastIntake,
+      ...lunchIntake,
+      ...dinnerIntake,
+      ...snackIntake,
+    ];
+    if (allIntakes.isEmpty) return const SizedBox();
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+      child: Card(
+        child: ListTile(
+          leading: const Icon(Icons.science_outlined),
+          title: const Text('Micronutrient Tracker'),
+          subtitle: const Text('Vitamins & minerals vs RDA'),
+          trailing: const Icon(Icons.chevron_right),
+          onTap: () async {
+            final user = await locator<GetUserUsecase>().getUserData();
+            if (context.mounted) {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (_) => MicronutrientSummaryScreen(
+                  allIntakes: allIntakes,
+                  gender: user.gender.index,
+                  age: user.age,
+                ),
+              ));
+            }
+          },
+        ),
+      ),
     );
   }
 
