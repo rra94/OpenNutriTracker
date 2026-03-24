@@ -9,11 +9,13 @@ import 'package:opennutritracker/core/presentation/widgets/activity_vertial_list
 import 'package:opennutritracker/core/presentation/widgets/edit_dialog.dart';
 import 'package:opennutritracker/core/presentation/widgets/delete_dialog.dart';
 import 'package:opennutritracker/core/presentation/widgets/disclaimer_dialog.dart';
+import 'package:opennutritracker/core/domain/usecase/get_user_usecase.dart';
 import 'package:opennutritracker/core/utils/locator.dart';
 import 'package:opennutritracker/features/add_meal/presentation/add_meal_type.dart';
 import 'package:opennutritracker/features/home/presentation/bloc/home_bloc.dart';
 import 'package:opennutritracker/features/home/presentation/widgets/dashboard_widget.dart';
 import 'package:opennutritracker/features/home/presentation/widgets/intake_vertical_list.dart';
+import 'package:opennutritracker/features/nutrition/presentation/micronutrient_summary_screen.dart';
 import 'package:opennutritracker/generated/l10n.dart';
 
 class HomePage extends StatefulWidget {
@@ -130,6 +132,8 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
           totalFatsGoal: totalFatsGoal,
           totalProteinsGoal: totalProteinsGoal,
         ),
+        _buildMicronutrientButton(context, breakfastIntakeList,
+            lunchIntakeList, dinnerIntakeList, snackIntakeList),
         ActivityVerticalList(
           day: DateTime.now(),
           title: S.of(context).activityLabel,
@@ -298,6 +302,42 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
         _homeBloc.add(const LoadItemsEvent());
       }
     });
+  }
+
+  Widget _buildMicronutrientButton(
+      BuildContext context,
+      List<IntakeEntity> breakfast,
+      List<IntakeEntity> lunch,
+      List<IntakeEntity> dinner,
+      List<IntakeEntity> snack) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+      child: Card(
+        child: ListTile(
+          leading: const Icon(Icons.science_outlined),
+          title: const Text('Micronutrient Tracker'),
+          subtitle: const Text('Vitamins & minerals vs RDA'),
+          trailing: const Icon(Icons.chevron_right),
+          onTap: () async {
+            final allIntakes = [
+              ...breakfast,
+              ...lunch,
+              ...dinner,
+              ...snack,
+            ];
+            final user =
+                await locator<GetUserUsecase>().getUserData();
+            Navigator.of(context).push(MaterialPageRoute(
+              builder: (_) => MicronutrientSummaryScreen(
+                allIntakes: allIntakes,
+                gender: user.gender.index,
+                age: user.age,
+              ),
+            ));
+          },
+        ),
+      ),
+    );
   }
 
   /// Refresh page when day changes
