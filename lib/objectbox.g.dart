@@ -103,7 +103,7 @@ final _entities = <obx_int.ModelEntity>[
   obx_int.ModelEntity(
     id: const obx_int.IdUid(2, 222820024314402058),
     name: 'IntakeOB',
-    lastPropertyId: const obx_int.IdUid(25, 3331335119793687726),
+    lastPropertyId: const obx_int.IdUid(49, 8262917921999380575),
     flags: 0,
     properties: <obx_int.ModelProperty>[
       obx_int.ModelProperty(
@@ -254,6 +254,150 @@ final _entities = <obx_int.ModelEntity>[
       obx_int.ModelProperty(
         id: const obx_int.IdUid(25, 3331335119793687726),
         name: 'fiber100',
+        type: 8,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(26, 2751917060317918041),
+        name: 'sodium100',
+        type: 8,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(27, 6106563860771147160),
+        name: 'potassium100',
+        type: 8,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(28, 3983056364114996429),
+        name: 'calcium100',
+        type: 8,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(29, 6375128194613779203),
+        name: 'iron100',
+        type: 8,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(30, 6358235870478816759),
+        name: 'magnesium100',
+        type: 8,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(31, 5080574838137777033),
+        name: 'phosphorus100',
+        type: 8,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(32, 3253887370971635581),
+        name: 'zinc100',
+        type: 8,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(33, 2477986222544339043),
+        name: 'copper100',
+        type: 8,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(34, 4597288143175488768),
+        name: 'manganese100',
+        type: 8,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(35, 2684091126884698254),
+        name: 'selenium100',
+        type: 8,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(36, 4435583683495340630),
+        name: 'vitaminA100',
+        type: 8,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(37, 2002082733397751101),
+        name: 'vitaminC100',
+        type: 8,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(38, 7886685951497628931),
+        name: 'vitaminD100',
+        type: 8,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(39, 6147560639452323478),
+        name: 'vitaminE100',
+        type: 8,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(40, 6749101435642143216),
+        name: 'vitaminK100',
+        type: 8,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(41, 8276312380632166752),
+        name: 'thiamine100',
+        type: 8,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(42, 8641832840537544956),
+        name: 'riboflavin100',
+        type: 8,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(43, 6898223419118814140),
+        name: 'niacin100',
+        type: 8,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(44, 3268045021358642101),
+        name: 'pantothenicAcid100',
+        type: 8,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(45, 8995285452069790636),
+        name: 'vitaminB6100',
+        type: 8,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(46, 3447893195242372239),
+        name: 'folate100',
+        type: 8,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(47, 2201541038774179969),
+        name: 'vitaminB12100',
+        type: 8,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(48, 3176894868595651877),
+        name: 'cholesterol100',
+        type: 8,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(49, 8262917921999380575),
+        name: 'addedSugars100',
         type: 8,
         flags: 0,
       ),
@@ -702,7 +846,7 @@ obx_int.ModelDefinition getObjectBoxModel() {
         final servingSizeOffset = object.servingSize == null
             ? null
             : fbb.writeString(object.servingSize!);
-        fbb.startTable(26);
+        fbb.startTable(50);
         fbb.addInt64(0, object.id);
         fbb.addOffset(1, intakeIdOffset);
         fbb.addOffset(2, unitOffset);
@@ -728,6 +872,30 @@ obx_int.ModelDefinition getObjectBoxModel() {
         fbb.addFloat64(22, object.sugars100);
         fbb.addFloat64(23, object.saturatedFat100);
         fbb.addFloat64(24, object.fiber100);
+        fbb.addFloat64(25, object.sodium100);
+        fbb.addFloat64(26, object.potassium100);
+        fbb.addFloat64(27, object.calcium100);
+        fbb.addFloat64(28, object.iron100);
+        fbb.addFloat64(29, object.magnesium100);
+        fbb.addFloat64(30, object.phosphorus100);
+        fbb.addFloat64(31, object.zinc100);
+        fbb.addFloat64(32, object.copper100);
+        fbb.addFloat64(33, object.manganese100);
+        fbb.addFloat64(34, object.selenium100);
+        fbb.addFloat64(35, object.vitaminA100);
+        fbb.addFloat64(36, object.vitaminC100);
+        fbb.addFloat64(37, object.vitaminD100);
+        fbb.addFloat64(38, object.vitaminE100);
+        fbb.addFloat64(39, object.vitaminK100);
+        fbb.addFloat64(40, object.thiamine100);
+        fbb.addFloat64(41, object.riboflavin100);
+        fbb.addFloat64(42, object.niacin100);
+        fbb.addFloat64(43, object.pantothenicAcid100);
+        fbb.addFloat64(44, object.vitaminB6100);
+        fbb.addFloat64(45, object.folate100);
+        fbb.addFloat64(46, object.vitaminB12100);
+        fbb.addFloat64(47, object.cholesterol100);
+        fbb.addFloat64(48, object.addedSugars100);
         fbb.finish(fbb.endTable());
         return object.id;
       },
@@ -834,6 +1002,123 @@ obx_int.ModelDefinition getObjectBoxModel() {
           rootOffset,
           52,
         );
+        final sodium100Param = const fb.Float64Reader().vTableGetNullable(
+          buffer,
+          rootOffset,
+          54,
+        );
+        final potassium100Param = const fb.Float64Reader().vTableGetNullable(
+          buffer,
+          rootOffset,
+          56,
+        );
+        final calcium100Param = const fb.Float64Reader().vTableGetNullable(
+          buffer,
+          rootOffset,
+          58,
+        );
+        final iron100Param = const fb.Float64Reader().vTableGetNullable(
+          buffer,
+          rootOffset,
+          60,
+        );
+        final magnesium100Param = const fb.Float64Reader().vTableGetNullable(
+          buffer,
+          rootOffset,
+          62,
+        );
+        final phosphorus100Param = const fb.Float64Reader().vTableGetNullable(
+          buffer,
+          rootOffset,
+          64,
+        );
+        final zinc100Param = const fb.Float64Reader().vTableGetNullable(
+          buffer,
+          rootOffset,
+          66,
+        );
+        final copper100Param = const fb.Float64Reader().vTableGetNullable(
+          buffer,
+          rootOffset,
+          68,
+        );
+        final manganese100Param = const fb.Float64Reader().vTableGetNullable(
+          buffer,
+          rootOffset,
+          70,
+        );
+        final selenium100Param = const fb.Float64Reader().vTableGetNullable(
+          buffer,
+          rootOffset,
+          72,
+        );
+        final vitaminA100Param = const fb.Float64Reader().vTableGetNullable(
+          buffer,
+          rootOffset,
+          74,
+        );
+        final vitaminC100Param = const fb.Float64Reader().vTableGetNullable(
+          buffer,
+          rootOffset,
+          76,
+        );
+        final vitaminD100Param = const fb.Float64Reader().vTableGetNullable(
+          buffer,
+          rootOffset,
+          78,
+        );
+        final vitaminE100Param = const fb.Float64Reader().vTableGetNullable(
+          buffer,
+          rootOffset,
+          80,
+        );
+        final vitaminK100Param = const fb.Float64Reader().vTableGetNullable(
+          buffer,
+          rootOffset,
+          82,
+        );
+        final thiamine100Param = const fb.Float64Reader().vTableGetNullable(
+          buffer,
+          rootOffset,
+          84,
+        );
+        final riboflavin100Param = const fb.Float64Reader().vTableGetNullable(
+          buffer,
+          rootOffset,
+          86,
+        );
+        final niacin100Param = const fb.Float64Reader().vTableGetNullable(
+          buffer,
+          rootOffset,
+          88,
+        );
+        final pantothenicAcid100Param = const fb.Float64Reader()
+            .vTableGetNullable(buffer, rootOffset, 90);
+        final vitaminB6100Param = const fb.Float64Reader().vTableGetNullable(
+          buffer,
+          rootOffset,
+          92,
+        );
+        final folate100Param = const fb.Float64Reader().vTableGetNullable(
+          buffer,
+          rootOffset,
+          94,
+        );
+        final vitaminB12100Param = const fb.Float64Reader().vTableGetNullable(
+          buffer,
+          rootOffset,
+          96,
+        );
+        final cholesterol100Param = const fb.Float64Reader().vTableGetNullable(
+          buffer,
+          rootOffset,
+          98,
+        );
+        final addedSugars100Param = const fb.Float64Reader().vTableGetNullable(
+          buffer,
+          rootOffset,
+          100,
+        );
         final object = IntakeOB(
           id: idParam,
           intakeId: intakeIdParam,
@@ -860,6 +1145,30 @@ obx_int.ModelDefinition getObjectBoxModel() {
           sugars100: sugars100Param,
           saturatedFat100: saturatedFat100Param,
           fiber100: fiber100Param,
+          sodium100: sodium100Param,
+          potassium100: potassium100Param,
+          calcium100: calcium100Param,
+          iron100: iron100Param,
+          magnesium100: magnesium100Param,
+          phosphorus100: phosphorus100Param,
+          zinc100: zinc100Param,
+          copper100: copper100Param,
+          manganese100: manganese100Param,
+          selenium100: selenium100Param,
+          vitaminA100: vitaminA100Param,
+          vitaminC100: vitaminC100Param,
+          vitaminD100: vitaminD100Param,
+          vitaminE100: vitaminE100Param,
+          vitaminK100: vitaminK100Param,
+          thiamine100: thiamine100Param,
+          riboflavin100: riboflavin100Param,
+          niacin100: niacin100Param,
+          pantothenicAcid100: pantothenicAcid100Param,
+          vitaminB6100: vitaminB6100Param,
+          folate100: folate100Param,
+          vitaminB12100: vitaminB12100Param,
+          cholesterol100: cholesterol100Param,
+          addedSugars100: addedSugars100Param,
         );
 
         return object;
@@ -1393,6 +1702,126 @@ class IntakeOB_ {
   /// See [IntakeOB.fiber100].
   static final fiber100 = obx.QueryDoubleProperty<IntakeOB>(
     _entities[1].properties[24],
+  );
+
+  /// See [IntakeOB.sodium100].
+  static final sodium100 = obx.QueryDoubleProperty<IntakeOB>(
+    _entities[1].properties[25],
+  );
+
+  /// See [IntakeOB.potassium100].
+  static final potassium100 = obx.QueryDoubleProperty<IntakeOB>(
+    _entities[1].properties[26],
+  );
+
+  /// See [IntakeOB.calcium100].
+  static final calcium100 = obx.QueryDoubleProperty<IntakeOB>(
+    _entities[1].properties[27],
+  );
+
+  /// See [IntakeOB.iron100].
+  static final iron100 = obx.QueryDoubleProperty<IntakeOB>(
+    _entities[1].properties[28],
+  );
+
+  /// See [IntakeOB.magnesium100].
+  static final magnesium100 = obx.QueryDoubleProperty<IntakeOB>(
+    _entities[1].properties[29],
+  );
+
+  /// See [IntakeOB.phosphorus100].
+  static final phosphorus100 = obx.QueryDoubleProperty<IntakeOB>(
+    _entities[1].properties[30],
+  );
+
+  /// See [IntakeOB.zinc100].
+  static final zinc100 = obx.QueryDoubleProperty<IntakeOB>(
+    _entities[1].properties[31],
+  );
+
+  /// See [IntakeOB.copper100].
+  static final copper100 = obx.QueryDoubleProperty<IntakeOB>(
+    _entities[1].properties[32],
+  );
+
+  /// See [IntakeOB.manganese100].
+  static final manganese100 = obx.QueryDoubleProperty<IntakeOB>(
+    _entities[1].properties[33],
+  );
+
+  /// See [IntakeOB.selenium100].
+  static final selenium100 = obx.QueryDoubleProperty<IntakeOB>(
+    _entities[1].properties[34],
+  );
+
+  /// See [IntakeOB.vitaminA100].
+  static final vitaminA100 = obx.QueryDoubleProperty<IntakeOB>(
+    _entities[1].properties[35],
+  );
+
+  /// See [IntakeOB.vitaminC100].
+  static final vitaminC100 = obx.QueryDoubleProperty<IntakeOB>(
+    _entities[1].properties[36],
+  );
+
+  /// See [IntakeOB.vitaminD100].
+  static final vitaminD100 = obx.QueryDoubleProperty<IntakeOB>(
+    _entities[1].properties[37],
+  );
+
+  /// See [IntakeOB.vitaminE100].
+  static final vitaminE100 = obx.QueryDoubleProperty<IntakeOB>(
+    _entities[1].properties[38],
+  );
+
+  /// See [IntakeOB.vitaminK100].
+  static final vitaminK100 = obx.QueryDoubleProperty<IntakeOB>(
+    _entities[1].properties[39],
+  );
+
+  /// See [IntakeOB.thiamine100].
+  static final thiamine100 = obx.QueryDoubleProperty<IntakeOB>(
+    _entities[1].properties[40],
+  );
+
+  /// See [IntakeOB.riboflavin100].
+  static final riboflavin100 = obx.QueryDoubleProperty<IntakeOB>(
+    _entities[1].properties[41],
+  );
+
+  /// See [IntakeOB.niacin100].
+  static final niacin100 = obx.QueryDoubleProperty<IntakeOB>(
+    _entities[1].properties[42],
+  );
+
+  /// See [IntakeOB.pantothenicAcid100].
+  static final pantothenicAcid100 = obx.QueryDoubleProperty<IntakeOB>(
+    _entities[1].properties[43],
+  );
+
+  /// See [IntakeOB.vitaminB6100].
+  static final vitaminB6100 = obx.QueryDoubleProperty<IntakeOB>(
+    _entities[1].properties[44],
+  );
+
+  /// See [IntakeOB.folate100].
+  static final folate100 = obx.QueryDoubleProperty<IntakeOB>(
+    _entities[1].properties[45],
+  );
+
+  /// See [IntakeOB.vitaminB12100].
+  static final vitaminB12100 = obx.QueryDoubleProperty<IntakeOB>(
+    _entities[1].properties[46],
+  );
+
+  /// See [IntakeOB.cholesterol100].
+  static final cholesterol100 = obx.QueryDoubleProperty<IntakeOB>(
+    _entities[1].properties[47],
+  );
+
+  /// See [IntakeOB.addedSugars100].
+  static final addedSugars100 = obx.QueryDoubleProperty<IntakeOB>(
+    _entities[1].properties[48],
   );
 }
 

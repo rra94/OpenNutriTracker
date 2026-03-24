@@ -188,6 +188,32 @@ class FDCConst {
   static const fdcTotalSaturatedFatId = 1258;
   static const fdcTotalDietaryFiberId = 1079;
 
+  // Micronutrient IDs
+  static const fdcSodiumId = 1093;
+  static const fdcPotassiumId = 1092;
+  static const fdcCalciumId = 1087;
+  static const fdcIronId = 1089;
+  static const fdcMagnesiumId = 1090;
+  static const fdcPhosphorusId = 1091;
+  static const fdcZincId = 1095;
+  static const fdcCopperId = 1098;
+  static const fdcManganeseId = 1101;
+  static const fdcSeleniumId = 1103;
+  static const fdcVitaminAId = 1106;      // Vitamin A, RAE
+  static const fdcVitaminCId = 1162;
+  static const fdcVitaminDId = 1114;      // Vitamin D (D2 + D3)
+  static const fdcVitaminEId = 1109;      // Vitamin E (alpha-tocopherol)
+  static const fdcVitaminKId = 1185;      // Vitamin K (phylloquinone)
+  static const fdcThiamineId = 1165;      // B1
+  static const fdcRiboflavinId = 1166;    // B2
+  static const fdcNiacinId = 1167;        // B3
+  static const fdcPantothenicAcidId = 1170; // B5
+  static const fdcVitaminB6Id = 1175;
+  static const fdcFolateId = 1187;        // Folate, total
+  static const fdcVitaminB12Id = 1178;
+  static const fdcCholesterolId = 1253;
+  static const fdcAddedSugarsId = 1235;
+
   // Measure unit codes
   static const fdcPortionServingId = 1049;
   static const fdcPortionUnknownId = 9999;

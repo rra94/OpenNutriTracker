@@ -46,6 +46,36 @@ class IntakeOB {
   double? saturatedFat100;
   double? fiber100;
 
+  // Micronutrients - Minerals
+  double? sodium100;
+  double? potassium100;
+  double? calcium100;
+  double? iron100;
+  double? magnesium100;
+  double? phosphorus100;
+  double? zinc100;
+  double? copper100;
+  double? manganese100;
+  double? selenium100;
+
+  // Micronutrients - Vitamins
+  double? vitaminA100;
+  double? vitaminC100;
+  double? vitaminD100;
+  double? vitaminE100;
+  double? vitaminK100;
+  double? thiamine100;
+  double? riboflavin100;
+  double? niacin100;
+  double? pantothenicAcid100;
+  double? vitaminB6100;
+  double? folate100;
+  double? vitaminB12100;
+
+  // Other
+  double? cholesterol100;
+  double? addedSugars100;
+
   IntakeOB({
     this.id = 0,
     required this.intakeId,
@@ -72,5 +102,29 @@ class IntakeOB {
     this.sugars100,
     this.saturatedFat100,
     this.fiber100,
+    this.sodium100,
+    this.potassium100,
+    this.calcium100,
+    this.iron100,
+    this.magnesium100,
+    this.phosphorus100,
+    this.zinc100,
+    this.copper100,
+    this.manganese100,
+    this.selenium100,
+    this.vitaminA100,
+    this.vitaminC100,
+    this.vitaminD100,
+    this.vitaminE100,
+    this.vitaminK100,
+    this.thiamine100,
+    this.riboflavin100,
+    this.niacin100,
+    this.pantothenicAcid100,
+    this.vitaminB6100,
+    this.folate100,
+    this.vitaminB12100,
+    this.cholesterol100,
+    this.addedSugars100,
   });
 }
