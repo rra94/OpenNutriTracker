@@ -209,6 +209,6 @@ Future<void> initLocator() async {
 
 Future<void> _initializeConfig(ConfigDataSourceOB configDataSource) async {
   if (!await configDataSource.configInitialized()) {
-    configDataSource.initializeConfig();
+    await configDataSource.initializeConfig();
   }
 }

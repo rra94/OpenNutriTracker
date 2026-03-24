@@ -12,9 +12,17 @@ class ConfigDataSourceOB {
   ConfigDataSourceOB(this._configBox);
 
   /// Get the single config record, or null if not initialized.
+  /// If duplicates exist (from a bug), keeps the first and removes the rest.
   ConfigOB? _getConfig() {
     final all = _configBox.getAll();
-    return all.isEmpty ? null : all.first;
+    if (all.isEmpty) return null;
+    if (all.length > 1) {
+      // Clean up duplicates — keep first, remove rest
+      for (int i = 1; i < all.length; i++) {
+        _configBox.remove(all[i].id);
+      }
+    }
+    return all.first;
   }
 
   /// Get the single config record, creating it if needed.
