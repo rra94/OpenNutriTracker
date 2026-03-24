@@ -59,6 +59,10 @@ import 'package:opennutritracker/features/settings/domain/usecase/export_data_us
 import 'package:opennutritracker/features/settings/domain/usecase/import_data_usecase.dart';
 import 'package:opennutritracker/features/settings/presentation/bloc/export_import_bloc.dart';
 import 'package:opennutritracker/features/settings/presentation/bloc/settings_bloc.dart';
+import 'package:opennutritracker/core/db/data_sources/water_data_source.dart';
+import 'package:opennutritracker/core/db/data_sources/habit_data_source.dart';
+import 'package:opennutritracker/core/db/data_sources/gut_health_data_source.dart';
+import 'package:opennutritracker/core/services/gut_health_service.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 final locator = GetIt.instance;
@@ -204,7 +208,20 @@ Future<void> initLocator() async {
   locator.registerLazySingleton<FDCDataSource>(() => FDCDataSource());
   locator.registerLazySingleton<SpFdcDataSource>(() => SpFdcDataSource());
 
+  // DataSources (Ayu features)
+  locator.registerLazySingleton<WaterDataSource>(
+      () => WaterDataSource(objectBoxProvider.waterRecordBox));
+  locator.registerLazySingleton<HabitDataSource>(
+      () => HabitDataSource(
+          objectBoxProvider.habitBox, objectBoxProvider.habitLogBox));
+  locator.registerLazySingleton<GutHealthDataSource>(
+      () => GutHealthDataSource(objectBoxProvider.gutHealthItemBox));
+
+  // Services
+  locator.registerLazySingleton<GutHealthService>(() => GutHealthService());
+
   await _initializeConfig(locator<ConfigDataSourceOB>());
+  await locator<HabitDataSource>().initializeDefaultHabits();
 }
 
 Future<void> _initializeConfig(ConfigDataSourceOB configDataSource) async {

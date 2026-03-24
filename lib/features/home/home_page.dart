@@ -10,7 +10,15 @@ import 'package:opennutritracker/core/presentation/widgets/edit_dialog.dart';
 import 'package:opennutritracker/core/presentation/widgets/delete_dialog.dart';
 import 'package:opennutritracker/core/presentation/widgets/disclaimer_dialog.dart';
 import 'package:opennutritracker/core/domain/usecase/get_user_usecase.dart';
+import 'package:opennutritracker/core/db/data_sources/water_data_source.dart';
+import 'package:opennutritracker/core/db/data_sources/habit_data_source.dart';
+import 'package:opennutritracker/core/db/data_sources/gut_health_data_source.dart';
+import 'package:opennutritracker/core/db/entities/gut_health_item_ob.dart';
+import 'package:opennutritracker/core/services/gut_health_service.dart';
 import 'package:opennutritracker/core/utils/locator.dart';
+import 'package:opennutritracker/features/water/presentation/water_tracker_widget.dart';
+import 'package:opennutritracker/features/habits/presentation/habits_checklist_widget.dart';
+import 'package:opennutritracker/features/gut_health/presentation/gut_health_panel.dart';
 import 'package:opennutritracker/features/add_meal/presentation/add_meal_type.dart';
 import 'package:opennutritracker/features/home/presentation/bloc/home_bloc.dart';
 import 'package:opennutritracker/features/home/presentation/widgets/dashboard_widget.dart';
@@ -133,8 +141,12 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
           totalFatsGoal: totalFatsGoal,
           totalProteinsGoal: totalProteinsGoal,
         ),
+        _buildWaterTracker(),
+        _buildHabitsChecklist(),
         _buildMicronutrientButton(context, breakfastIntakeList,
             lunchIntakeList, dinnerIntakeList, snackIntakeList),
+        _buildGutHealthPanel(breakfastIntakeList, lunchIntakeList,
+            dinnerIntakeList, snackIntakeList),
         ActivityVerticalList(
           day: DateTime.now(),
           title: S.of(context).activityLabel,
@@ -275,6 +287,82 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
         _homeBloc.add(const LoadItemsEvent());
       }
     });
+  }
+
+  Widget _buildWaterTracker() {
+    final waterDs = locator<WaterDataSource>();
+    return FutureBuilder<double>(
+      future: waterDs.getTodayTotal(),
+      builder: (context, snapshot) {
+        final currentML = snapshot.data ?? 0;
+        return WaterTrackerWidget(
+          currentML: currentML,
+          goalML: 2500,
+          onAddWater: (ml) async {
+            await waterDs.addWaterRecord(ml, DateTime.now());
+            setState(() {});
+          },
+        );
+      },
+    );
+  }
+
+  Widget _buildHabitsChecklist() {
+    final habitDs = locator<HabitDataSource>();
+    return FutureBuilder(
+      future: Future.wait([
+        habitDs.getAllActiveHabits(),
+        habitDs.getLogsForDate(DateTime.now()),
+      ]),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) return const SizedBox();
+        final habits = snapshot.data![0] as List;
+        final logs = snapshot.data![1] as List;
+        final completedIds = <int>{};
+        for (final log in logs) {
+          if ((log as dynamic).completed) {
+            completedIds.add((log as dynamic).habitId);
+          }
+        }
+        return HabitsChecklistWidget(
+          habits: habits.cast(),
+          completedHabitIds: completedIds,
+          onToggle: (habitId, completed) async {
+            await habitDs.toggleHabitLog(habitId, DateTime.now(), completed);
+            setState(() {});
+          },
+        );
+      },
+    );
+  }
+
+  Widget _buildGutHealthPanel(
+      List<IntakeEntity> breakfast,
+      List<IntakeEntity> lunch,
+      List<IntakeEntity> dinner,
+      List<IntakeEntity> snack) {
+    final allIntakes = [...breakfast, ...lunch, ...dinner, ...snack];
+    final gutService = locator<GutHealthService>();
+    final autoFlagged = gutService.flagFromIntakes(allIntakes);
+    final gutDs = locator<GutHealthDataSource>();
+    return FutureBuilder<List<GutHealthItemOB>>(
+      future: gutDs.getManualItemsByDate(DateTime.now()),
+      builder: (context, snapshot) {
+        final manualItems = snapshot.data ?? [];
+        final allItems = [...autoFlagged, ...manualItems];
+        return GutHealthPanel(
+          items: allItems,
+          onAddManualItem: (item) async {
+            await gutDs.addItem(item);
+            setState(() {});
+          },
+          onDeleteItem: (id) async {
+            await gutDs.deleteItem(id);
+            setState(() {});
+          },
+        );
+      },
+    );
   }
 
   Widget _buildMicronutrientButton(

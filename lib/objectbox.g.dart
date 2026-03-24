@@ -15,11 +15,15 @@ import 'package:objectbox/objectbox.dart' as obx;
 import 'package:objectbox_flutter_libs/objectbox_flutter_libs.dart';
 
 import 'core/db/entities/config_ob.dart';
+import 'core/db/entities/gut_health_item_ob.dart';
+import 'core/db/entities/habit_log_ob.dart';
+import 'core/db/entities/habit_ob.dart';
 import 'core/db/entities/intake_ob.dart';
 import 'core/db/entities/physical_activity_ob.dart';
 import 'core/db/entities/tracked_day_ob.dart';
 import 'core/db/entities/user_activity_ob.dart';
 import 'core/db/entities/user_ob.dart';
+import 'core/db/entities/water_record_ob.dart';
 
 export 'package:objectbox/objectbox.dart'; // so that callers only have to import this file
 
@@ -656,6 +660,154 @@ final _entities = <obx_int.ModelEntity>[
     relations: <obx_int.ModelRelation>[],
     backlinks: <obx_int.ModelBacklink>[],
   ),
+  obx_int.ModelEntity(
+    id: const obx_int.IdUid(7, 2494492286301300394),
+    name: 'GutHealthItemOB',
+    lastPropertyId: const obx_int.IdUid(6, 3486255085334882947),
+    flags: 0,
+    properties: <obx_int.ModelProperty>[
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(1, 7811082825313000450),
+        name: 'id',
+        type: 6,
+        flags: 1,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(2, 7887262344800656475),
+        name: 'name',
+        type: 9,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(3, 2899736536307687814),
+        name: 'category',
+        type: 9,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(4, 8816371267439659764),
+        name: 'dateTime',
+        type: 10,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(5, 6793353370448096568),
+        name: 'isAutoFlagged',
+        type: 1,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(6, 3486255085334882947),
+        name: 'sourceIntakeId',
+        type: 9,
+        flags: 0,
+      ),
+    ],
+    relations: <obx_int.ModelRelation>[],
+    backlinks: <obx_int.ModelBacklink>[],
+  ),
+  obx_int.ModelEntity(
+    id: const obx_int.IdUid(8, 1370534373946555578),
+    name: 'HabitLogOB',
+    lastPropertyId: const obx_int.IdUid(4, 5571970018044348505),
+    flags: 0,
+    properties: <obx_int.ModelProperty>[
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(1, 7979968088678243758),
+        name: 'id',
+        type: 6,
+        flags: 1,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(2, 7061718633088095527),
+        name: 'habitId',
+        type: 6,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(3, 5080065482921261631),
+        name: 'dateTime',
+        type: 10,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(4, 5571970018044348505),
+        name: 'completed',
+        type: 1,
+        flags: 0,
+      ),
+    ],
+    relations: <obx_int.ModelRelation>[],
+    backlinks: <obx_int.ModelBacklink>[],
+  ),
+  obx_int.ModelEntity(
+    id: const obx_int.IdUid(9, 3446880705750154736),
+    name: 'HabitOB',
+    lastPropertyId: const obx_int.IdUid(5, 3267316403142564014),
+    flags: 0,
+    properties: <obx_int.ModelProperty>[
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(1, 6923817044308253331),
+        name: 'id',
+        type: 6,
+        flags: 1,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(2, 6152132543417919542),
+        name: 'name',
+        type: 9,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(3, 5156324938121614033),
+        name: 'category',
+        type: 9,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(4, 1395827786658467559),
+        name: 'sortOrder',
+        type: 6,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(5, 3267316403142564014),
+        name: 'isActive',
+        type: 1,
+        flags: 0,
+      ),
+    ],
+    relations: <obx_int.ModelRelation>[],
+    backlinks: <obx_int.ModelBacklink>[],
+  ),
+  obx_int.ModelEntity(
+    id: const obx_int.IdUid(10, 789815896546770560),
+    name: 'WaterRecordOB',
+    lastPropertyId: const obx_int.IdUid(3, 6686232328674370670),
+    flags: 0,
+    properties: <obx_int.ModelProperty>[
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(1, 218454635503609085),
+        name: 'id',
+        type: 6,
+        flags: 1,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(2, 347473416817126082),
+        name: 'amountML',
+        type: 8,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(3, 6686232328674370670),
+        name: 'dateTime',
+        type: 10,
+        flags: 0,
+      ),
+    ],
+    relations: <obx_int.ModelRelation>[],
+    backlinks: <obx_int.ModelBacklink>[],
+  ),
 ];
 
 /// Shortcut for [obx.Store.new] that passes [getObjectBoxModel] and for Flutter
@@ -696,7 +848,7 @@ Future<obx.Store> openStore({
 obx_int.ModelDefinition getObjectBoxModel() {
   final model = obx_int.ModelInfo(
     entities: _entities,
-    lastEntityId: const obx_int.IdUid(6, 7636978955874029769),
+    lastEntityId: const obx_int.IdUid(10, 789815896546770560),
     lastIndexId: const obx_int.IdUid(2, 7319863865959781371),
     lastRelationId: const obx_int.IdUid(0, 0),
     lastSequenceId: const obx_int.IdUid(0, 0),
@@ -1515,6 +1667,221 @@ obx_int.ModelDefinition getObjectBoxModel() {
         return object;
       },
     ),
+    GutHealthItemOB: obx_int.EntityDefinition<GutHealthItemOB>(
+      model: _entities[6],
+      toOneRelations: (GutHealthItemOB object) => [],
+      toManyRelations: (GutHealthItemOB object) => {},
+      getId: (GutHealthItemOB object) => object.id,
+      setId: (GutHealthItemOB object, int id) {
+        object.id = id;
+      },
+      objectToFB: (GutHealthItemOB object, fb.Builder fbb) {
+        final nameOffset = fbb.writeString(object.name);
+        final categoryOffset = fbb.writeString(object.category);
+        final sourceIntakeIdOffset = object.sourceIntakeId == null
+            ? null
+            : fbb.writeString(object.sourceIntakeId!);
+        fbb.startTable(7);
+        fbb.addInt64(0, object.id);
+        fbb.addOffset(1, nameOffset);
+        fbb.addOffset(2, categoryOffset);
+        fbb.addInt64(3, object.dateTime.millisecondsSinceEpoch);
+        fbb.addBool(4, object.isAutoFlagged);
+        fbb.addOffset(5, sourceIntakeIdOffset);
+        fbb.finish(fbb.endTable());
+        return object.id;
+      },
+      objectFromFB: (obx.Store store, ByteData fbData) {
+        final buffer = fb.BufferContext(fbData);
+        final rootOffset = buffer.derefObject(0);
+        final idParam = const fb.Int64Reader().vTableGet(
+          buffer,
+          rootOffset,
+          4,
+          0,
+        );
+        final nameParam = const fb.StringReader(
+          asciiOptimization: true,
+        ).vTableGet(buffer, rootOffset, 6, '');
+        final categoryParam = const fb.StringReader(
+          asciiOptimization: true,
+        ).vTableGet(buffer, rootOffset, 8, '');
+        final dateTimeParam = DateTime.fromMillisecondsSinceEpoch(
+          const fb.Int64Reader().vTableGet(buffer, rootOffset, 10, 0),
+        );
+        final isAutoFlaggedParam = const fb.BoolReader().vTableGet(
+          buffer,
+          rootOffset,
+          12,
+          false,
+        );
+        final sourceIntakeIdParam = const fb.StringReader(
+          asciiOptimization: true,
+        ).vTableGetNullable(buffer, rootOffset, 14);
+        final object = GutHealthItemOB(
+          id: idParam,
+          name: nameParam,
+          category: categoryParam,
+          dateTime: dateTimeParam,
+          isAutoFlagged: isAutoFlaggedParam,
+          sourceIntakeId: sourceIntakeIdParam,
+        );
+
+        return object;
+      },
+    ),
+    HabitLogOB: obx_int.EntityDefinition<HabitLogOB>(
+      model: _entities[7],
+      toOneRelations: (HabitLogOB object) => [],
+      toManyRelations: (HabitLogOB object) => {},
+      getId: (HabitLogOB object) => object.id,
+      setId: (HabitLogOB object, int id) {
+        object.id = id;
+      },
+      objectToFB: (HabitLogOB object, fb.Builder fbb) {
+        fbb.startTable(5);
+        fbb.addInt64(0, object.id);
+        fbb.addInt64(1, object.habitId);
+        fbb.addInt64(2, object.dateTime.millisecondsSinceEpoch);
+        fbb.addBool(3, object.completed);
+        fbb.finish(fbb.endTable());
+        return object.id;
+      },
+      objectFromFB: (obx.Store store, ByteData fbData) {
+        final buffer = fb.BufferContext(fbData);
+        final rootOffset = buffer.derefObject(0);
+        final idParam = const fb.Int64Reader().vTableGet(
+          buffer,
+          rootOffset,
+          4,
+          0,
+        );
+        final habitIdParam = const fb.Int64Reader().vTableGet(
+          buffer,
+          rootOffset,
+          6,
+          0,
+        );
+        final dateTimeParam = DateTime.fromMillisecondsSinceEpoch(
+          const fb.Int64Reader().vTableGet(buffer, rootOffset, 8, 0),
+        );
+        final completedParam = const fb.BoolReader().vTableGet(
+          buffer,
+          rootOffset,
+          10,
+          false,
+        );
+        final object = HabitLogOB(
+          id: idParam,
+          habitId: habitIdParam,
+          dateTime: dateTimeParam,
+          completed: completedParam,
+        );
+
+        return object;
+      },
+    ),
+    HabitOB: obx_int.EntityDefinition<HabitOB>(
+      model: _entities[8],
+      toOneRelations: (HabitOB object) => [],
+      toManyRelations: (HabitOB object) => {},
+      getId: (HabitOB object) => object.id,
+      setId: (HabitOB object, int id) {
+        object.id = id;
+      },
+      objectToFB: (HabitOB object, fb.Builder fbb) {
+        final nameOffset = fbb.writeString(object.name);
+        final categoryOffset = fbb.writeString(object.category);
+        fbb.startTable(6);
+        fbb.addInt64(0, object.id);
+        fbb.addOffset(1, nameOffset);
+        fbb.addOffset(2, categoryOffset);
+        fbb.addInt64(3, object.sortOrder);
+        fbb.addBool(4, object.isActive);
+        fbb.finish(fbb.endTable());
+        return object.id;
+      },
+      objectFromFB: (obx.Store store, ByteData fbData) {
+        final buffer = fb.BufferContext(fbData);
+        final rootOffset = buffer.derefObject(0);
+        final idParam = const fb.Int64Reader().vTableGet(
+          buffer,
+          rootOffset,
+          4,
+          0,
+        );
+        final nameParam = const fb.StringReader(
+          asciiOptimization: true,
+        ).vTableGet(buffer, rootOffset, 6, '');
+        final categoryParam = const fb.StringReader(
+          asciiOptimization: true,
+        ).vTableGet(buffer, rootOffset, 8, '');
+        final sortOrderParam = const fb.Int64Reader().vTableGet(
+          buffer,
+          rootOffset,
+          10,
+          0,
+        );
+        final isActiveParam = const fb.BoolReader().vTableGet(
+          buffer,
+          rootOffset,
+          12,
+          false,
+        );
+        final object = HabitOB(
+          id: idParam,
+          name: nameParam,
+          category: categoryParam,
+          sortOrder: sortOrderParam,
+          isActive: isActiveParam,
+        );
+
+        return object;
+      },
+    ),
+    WaterRecordOB: obx_int.EntityDefinition<WaterRecordOB>(
+      model: _entities[9],
+      toOneRelations: (WaterRecordOB object) => [],
+      toManyRelations: (WaterRecordOB object) => {},
+      getId: (WaterRecordOB object) => object.id,
+      setId: (WaterRecordOB object, int id) {
+        object.id = id;
+      },
+      objectToFB: (WaterRecordOB object, fb.Builder fbb) {
+        fbb.startTable(4);
+        fbb.addInt64(0, object.id);
+        fbb.addFloat64(1, object.amountML);
+        fbb.addInt64(2, object.dateTime.millisecondsSinceEpoch);
+        fbb.finish(fbb.endTable());
+        return object.id;
+      },
+      objectFromFB: (obx.Store store, ByteData fbData) {
+        final buffer = fb.BufferContext(fbData);
+        final rootOffset = buffer.derefObject(0);
+        final idParam = const fb.Int64Reader().vTableGet(
+          buffer,
+          rootOffset,
+          4,
+          0,
+        );
+        final amountMLParam = const fb.Float64Reader().vTableGet(
+          buffer,
+          rootOffset,
+          6,
+          0,
+        );
+        final dateTimeParam = DateTime.fromMillisecondsSinceEpoch(
+          const fb.Int64Reader().vTableGet(buffer, rootOffset, 8, 0),
+        );
+        final object = WaterRecordOB(
+          id: idParam,
+          amountML: amountMLParam,
+          dateTime: dateTimeParam,
+        );
+
+        return object;
+      },
+    ),
   };
 
   return obx_int.ModelDefinition(model, bindings);
@@ -2009,5 +2376,107 @@ class UserOB_ {
   /// See [UserOB.pal].
   static final pal = obx.QueryIntegerProperty<UserOB>(
     _entities[5].properties[6],
+  );
+}
+
+/// [GutHealthItemOB] entity fields to define ObjectBox queries.
+class GutHealthItemOB_ {
+  /// See [GutHealthItemOB.id].
+  static final id = obx.QueryIntegerProperty<GutHealthItemOB>(
+    _entities[6].properties[0],
+  );
+
+  /// See [GutHealthItemOB.name].
+  static final name = obx.QueryStringProperty<GutHealthItemOB>(
+    _entities[6].properties[1],
+  );
+
+  /// See [GutHealthItemOB.category].
+  static final category = obx.QueryStringProperty<GutHealthItemOB>(
+    _entities[6].properties[2],
+  );
+
+  /// See [GutHealthItemOB.dateTime].
+  static final dateTime = obx.QueryDateProperty<GutHealthItemOB>(
+    _entities[6].properties[3],
+  );
+
+  /// See [GutHealthItemOB.isAutoFlagged].
+  static final isAutoFlagged = obx.QueryBooleanProperty<GutHealthItemOB>(
+    _entities[6].properties[4],
+  );
+
+  /// See [GutHealthItemOB.sourceIntakeId].
+  static final sourceIntakeId = obx.QueryStringProperty<GutHealthItemOB>(
+    _entities[6].properties[5],
+  );
+}
+
+/// [HabitLogOB] entity fields to define ObjectBox queries.
+class HabitLogOB_ {
+  /// See [HabitLogOB.id].
+  static final id = obx.QueryIntegerProperty<HabitLogOB>(
+    _entities[7].properties[0],
+  );
+
+  /// See [HabitLogOB.habitId].
+  static final habitId = obx.QueryIntegerProperty<HabitLogOB>(
+    _entities[7].properties[1],
+  );
+
+  /// See [HabitLogOB.dateTime].
+  static final dateTime = obx.QueryDateProperty<HabitLogOB>(
+    _entities[7].properties[2],
+  );
+
+  /// See [HabitLogOB.completed].
+  static final completed = obx.QueryBooleanProperty<HabitLogOB>(
+    _entities[7].properties[3],
+  );
+}
+
+/// [HabitOB] entity fields to define ObjectBox queries.
+class HabitOB_ {
+  /// See [HabitOB.id].
+  static final id = obx.QueryIntegerProperty<HabitOB>(
+    _entities[8].properties[0],
+  );
+
+  /// See [HabitOB.name].
+  static final name = obx.QueryStringProperty<HabitOB>(
+    _entities[8].properties[1],
+  );
+
+  /// See [HabitOB.category].
+  static final category = obx.QueryStringProperty<HabitOB>(
+    _entities[8].properties[2],
+  );
+
+  /// See [HabitOB.sortOrder].
+  static final sortOrder = obx.QueryIntegerProperty<HabitOB>(
+    _entities[8].properties[3],
+  );
+
+  /// See [HabitOB.isActive].
+  static final isActive = obx.QueryBooleanProperty<HabitOB>(
+    _entities[8].properties[4],
+  );
+}
+
+/// [WaterRecordOB] entity fields to define ObjectBox queries.
+class WaterRecordOB_ {
+  /// See [WaterRecordOB.id].
+  static final id = obx.QueryIntegerProperty<WaterRecordOB>(
+    _entities[9].properties[0],
+  );
+
+  /// See [WaterRecordOB.amountML].
+  static final amountML = obx.QueryDoubleProperty<WaterRecordOB>(
+    _entities[9].properties[1],
+  );
+
+  /// See [WaterRecordOB.dateTime].
+  static final dateTime = obx.QueryDateProperty<WaterRecordOB>(
+    _entities[9].properties[2],
   );
 }

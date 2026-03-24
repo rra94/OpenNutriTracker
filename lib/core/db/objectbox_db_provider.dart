@@ -6,6 +6,10 @@ import 'package:opennutritracker/core/db/entities/user_ob.dart';
 import 'package:opennutritracker/core/db/entities/config_ob.dart';
 import 'package:opennutritracker/core/db/entities/user_activity_ob.dart';
 import 'package:opennutritracker/core/db/entities/physical_activity_ob.dart';
+import 'package:opennutritracker/core/db/entities/water_record_ob.dart';
+import 'package:opennutritracker/core/db/entities/habit_ob.dart';
+import 'package:opennutritracker/core/db/entities/habit_log_ob.dart';
+import 'package:opennutritracker/core/db/entities/gut_health_item_ob.dart';
 import 'package:opennutritracker/objectbox.g.dart';
 
 class ObjectBoxDBProvider extends ChangeNotifier {
@@ -17,6 +21,10 @@ class ObjectBoxDBProvider extends ChangeNotifier {
   late Box<ConfigOB> configBox;
   late Box<UserActivityOB> userActivityBox;
   late Box<PhysicalActivityOB> physicalActivityBox;
+  late Box<WaterRecordOB> waterRecordBox;
+  late Box<HabitOB> habitBox;
+  late Box<HabitLogOB> habitLogBox;
+  late Box<GutHealthItemOB> gutHealthItemBox;
 
   Future<void> init() async {
     final dir = await getApplicationDocumentsDirectory();
@@ -28,6 +36,10 @@ class ObjectBoxDBProvider extends ChangeNotifier {
     configBox = store.box<ConfigOB>();
     userActivityBox = store.box<UserActivityOB>();
     physicalActivityBox = store.box<PhysicalActivityOB>();
+    waterRecordBox = store.box<WaterRecordOB>();
+    habitBox = store.box<HabitOB>();
+    habitLogBox = store.box<HabitLogOB>();
+    gutHealthItemBox = store.box<GutHealthItemOB>();
   }
 
   void close() {
