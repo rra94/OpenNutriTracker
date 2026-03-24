@@ -15,7 +15,13 @@ class UserDataSourceOB {
 
   UserOB? _getUser() {
     final all = _userBox.getAll();
-    return all.isEmpty ? null : all.first;
+    if (all.isEmpty) return null;
+    if (all.length > 1) {
+      for (int i = 1; i < all.length; i++) {
+        _userBox.remove(all[i].id);
+      }
+    }
+    return all.first;
   }
 
   Future<void> saveUserData(UserDBO userDBO) async {
