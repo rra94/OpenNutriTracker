@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:opennutritracker/core/db/entities/gut_health_item_ob.dart';
 
+class _ManualItem {
+  final String category;
+  final String description;
+  const _ManualItem(this.category, this.description);
+}
+
 class GutHealthPanel extends StatelessWidget {
   final List<GutHealthItemOB> items;
   final void Function(GutHealthItemOB item) onAddManualItem;
@@ -181,7 +187,16 @@ class GutHealthPanel extends StatelessWidget {
       case 'artificial_sweeteners': return Icons.science_outlined;
       case 'alcohol': return Icons.local_bar_outlined;
       case 'processed_foods': return Icons.fastfood_outlined;
+      case 'ultra_processed': return Icons.factory_outlined;
       case 'nsaids': return Icons.medication_outlined;
+      case 'emulsifier': return Icons.blur_on;
+      case 'thickener_gum': return Icons.water_drop_outlined;
+      case 'preservative': return Icons.shield_outlined;
+      case 'artificial_coloring': return Icons.palette_outlined;
+      case 'artificial_flavor': return Icons.air_outlined;
+      case 'seed_oil': return Icons.oil_barrel_outlined;
+      case 'excess_sodium': return Icons.grain;
+      case 'trans_fat': return Icons.heart_broken_outlined;
       default: return Icons.warning_amber;
     }
   }
@@ -193,10 +208,17 @@ class GutHealthPanel extends StatelessWidget {
       case 'artificial_sweeteners': return 'Artificial Sweeteners';
       case 'alcohol': return 'Alcohol';
       case 'processed_foods': return 'Processed Foods';
+      case 'ultra_processed': return 'Ultra-Processed';
       case 'nsaids': return 'NSAIDs';
       case 'fried_foods': return 'Fried Foods';
-      case 'emulsifiers': return 'Emulsifiers';
-      case 'artificial_coloring': return 'Artificial Coloring';
+      case 'emulsifier': return 'Emulsifier';
+      case 'thickener_gum': return 'Thickener/Gum';
+      case 'preservative': return 'Preservative';
+      case 'artificial_coloring': return 'Artificial Color';
+      case 'artificial_flavor': return 'Artificial Flavor';
+      case 'seed_oil': return 'Seed Oil';
+      case 'excess_sodium': return 'Excess Sodium';
+      case 'trans_fat': return 'Trans Fat';
       default: return category;
     }
   }
@@ -208,75 +230,164 @@ class GutHealthPanel extends StatelessWidget {
       case 'artificial_sweeteners': return Colors.purple.withValues(alpha: 0.2);
       case 'alcohol': return Colors.red.withValues(alpha: 0.2);
       case 'processed_foods': return Colors.grey.withValues(alpha: 0.2);
+      case 'ultra_processed': return Colors.grey.withValues(alpha: 0.3);
       case 'nsaids': return Colors.blue.withValues(alpha: 0.2);
       case 'fried_foods': return Colors.amber.withValues(alpha: 0.2);
+      case 'emulsifier': return Colors.deepOrange.withValues(alpha: 0.2);
+      case 'thickener_gum': return Colors.teal.withValues(alpha: 0.2);
+      case 'preservative': return Colors.indigo.withValues(alpha: 0.2);
+      case 'artificial_coloring': return Colors.pink.withValues(alpha: 0.2);
+      case 'artificial_flavor': return Colors.cyan.withValues(alpha: 0.2);
+      case 'seed_oil': return Colors.yellow.withValues(alpha: 0.3);
+      case 'excess_sodium': return Colors.blueGrey.withValues(alpha: 0.2);
+      case 'trans_fat': return Colors.red.withValues(alpha: 0.3);
       default: return theme.colorScheme.surfaceContainerHighest;
     }
   }
 
   void _showLogItemDialog(BuildContext context) {
-    final manualItemOptions = <String, String>{
-      'Artificial sweeteners': 'artificial_sweeteners',
-      'Alcohol': 'alcohol',
-      'Processed foods': 'processed_foods',
-      'NSAIDs (ibuprofen, etc.)': 'nsaids',
-      'Fried food': 'fried_foods',
-      'Soda / soft drink': 'high_sugar',
-      'Emulsifiers': 'emulsifiers',
-      'Artificial coloring': 'artificial_coloring',
-      'Excess refined sugar': 'high_sugar',
-      'Energy drink': 'artificial_sweeteners',
+    // Categories from "Eat Everything" by Dr. Dawn Harris Sherling
+    // and peer-reviewed gut microbiome research
+    final manualItemOptions = <String, _ManualItem>{
+      // Emulsifiers — the core focus of "Eat Everything"
+      'Polysorbate 80 (P80)': _ManualItem('emulsifier', 'Damages gut mucus layer, promotes inflammation'),
+      'Carboxymethylcellulose (CMC)': _ManualItem('emulsifier', 'Thins intestinal lining, alters microbiome'),
+      'Carrageenan': _ManualItem('emulsifier', 'Linked to IBD and ulcers (Harvard 2017)'),
+      'Soy lecithin (excess)': _ManualItem('emulsifier', 'Generally safe in small amounts'),
+      'Mono/diglycerides': _ManualItem('emulsifier', 'Common in baked goods, may contain trans fats'),
+
+      // Thickeners & Gums
+      'Xanthan gum': _ManualItem('thickener_gum', 'Can cause GI discomfort'),
+      'Guar gum': _ManualItem('thickener_gum', 'May irritate stomach lining'),
+      'Maltodextrin': _ManualItem('thickener_gum', 'Spikes blood sugar, disrupts gut bacteria'),
+      'Modified food starch': _ManualItem('thickener_gum', 'Ultra-processed thickener'),
+
+      // Artificial sweeteners
+      'Aspartame': _ManualItem('artificial_sweeteners', 'Disrupts gut bacteria balance'),
+      'Sucralose (Splenda)': _ManualItem('artificial_sweeteners', 'Reduces beneficial gut bacteria'),
+      'Saccharin': _ManualItem('artificial_sweeteners', 'Alters gut microbiome composition'),
+      'Acesulfame-K': _ManualItem('artificial_sweeteners', 'Linked to microbiome changes'),
+
+      // Preservatives
+      'Sodium benzoate': _ManualItem('preservative', 'May damage cell DNA, trigger inflammation'),
+      'BHA/BHT': _ManualItem('preservative', 'Potential endocrine disruptors'),
+      'Sodium nitrite/nitrate': _ManualItem('preservative', 'In processed meats, linked to gut inflammation'),
+      'Potassium sorbate': _ManualItem('preservative', 'Common preservative, may irritate gut'),
+      'TBHQ': _ManualItem('preservative', 'May impair immune response'),
+
+      // Artificial colors
+      'Red 40 / Yellow 5 / Blue 1': _ManualItem('artificial_coloring', 'Petroleum-derived, may promote inflammation'),
+      'Titanium dioxide': _ManualItem('artificial_coloring', 'Nanoparticle, damages intestinal cells'),
+      'Caramel color (4-MEI)': _ManualItem('artificial_coloring', 'Contains potential carcinogen 4-MEI'),
+
+      // Other harmful items
+      'Alcohol': _ManualItem('alcohol', 'Damages gut lining, disrupts microbiome'),
+      'NSAIDs (ibuprofen, etc.)': _ManualItem('nsaids', 'Increases intestinal permeability'),
+      'Fried food': _ManualItem('fried_foods', 'Creates inflammatory compounds'),
+      'Seed/vegetable oils (excess)': _ManualItem('seed_oil', 'High omega-6, promotes inflammation'),
+      'Trans fats / partially hydrogenated': _ManualItem('trans_fat', 'Damages gut barrier and cardiovascular system'),
+      'Ultra-processed food': _ManualItem('ultra_processed', 'Avg 5+ additives, disrupts microbiome'),
+      'Soda / soft drink': _ManualItem('high_sugar', 'High sugar + phosphoric acid'),
+      'Energy drink': _ManualItem('artificial_sweeteners', 'Multiple additives + excess caffeine'),
+      'Excess refined sugar': _ManualItem('high_sugar', 'Feeds harmful gut bacteria'),
+      'Artificial flavoring': _ManualItem('artificial_flavor', 'Often petroleum-derived compounds'),
+      'High-sodium meal': _ManualItem('excess_sodium', 'Excess sodium disrupts gut bacteria'),
     };
 
     final selected = <String>{};
+    String searchQuery = '';
 
     showDialog(
       context: context,
       builder: (ctx) => StatefulBuilder(
-        builder: (ctx, setState) => AlertDialog(
-          title: const Text('Log Gut-Harmful Items'),
-          content: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: manualItemOptions.entries.map((entry) {
-                return CheckboxListTile(
-                  dense: true,
-                  title: Text(entry.key),
-                  value: selected.contains(entry.key),
-                  onChanged: (val) {
-                    setState(() {
-                      if (val == true) {
-                        selected.add(entry.key);
-                      } else {
-                        selected.remove(entry.key);
-                      }
-                    });
-                  },
-                );
-              }).toList(),
+        builder: (ctx, setDialogState) {
+          final filtered = manualItemOptions.entries
+              .where((e) =>
+                  searchQuery.isEmpty ||
+                  e.key.toLowerCase().contains(searchQuery.toLowerCase()) ||
+                  e.value.category.toLowerCase().contains(searchQuery.toLowerCase()))
+              .toList();
+
+          return AlertDialog(
+            title: const Text('Log Gut-Harmful Items'),
+            content: SizedBox(
+              width: double.maxFinite,
+              height: 400,
+              child: Column(
+                children: [
+                  TextField(
+                    decoration: const InputDecoration(
+                      hintText: 'Search additives...',
+                      prefixIcon: Icon(Icons.search, size: 20),
+                      isDense: true,
+                    ),
+                    onChanged: (val) => setDialogState(() => searchQuery = val),
+                  ),
+                  const SizedBox(height: 8),
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: filtered.length,
+                      itemBuilder: (ctx, index) {
+                        final entry = filtered[index];
+                        return CheckboxListTile(
+                          dense: true,
+                          title: Text(entry.key, style: const TextStyle(fontSize: 14)),
+                          subtitle: Text(
+                            entry.value.description,
+                            style: TextStyle(
+                              fontSize: 11,
+                              color: Theme.of(ctx).colorScheme.onSurfaceVariant,
+                            ),
+                          ),
+                          value: selected.contains(entry.key),
+                          onChanged: (val) {
+                            setDialogState(() {
+                              if (val == true) {
+                                selected.add(entry.key);
+                              } else {
+                                selected.remove(entry.key);
+                              }
+                            });
+                          },
+                        );
+                      },
+                    ),
+                  ),
+                  if (selected.isNotEmpty)
+                    Padding(
+                      padding: const EdgeInsets.only(top: 8),
+                      child: Text(
+                        '${selected.length} selected',
+                        style: Theme.of(ctx).textTheme.labelSmall,
+                      ),
+                    ),
+                ],
+              ),
             ),
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.of(ctx).pop(),
-              child: const Text('Cancel'),
-            ),
-            FilledButton(
-              onPressed: () {
-                for (final name in selected) {
-                  onAddManualItem(GutHealthItemOB(
-                    name: name,
-                    category: manualItemOptions[name]!,
-                    dateTime: DateTime.now(),
-                    isAutoFlagged: false,
-                  ));
-                }
-                Navigator.of(ctx).pop();
-              },
-              child: const Text('Log'),
-            ),
-          ],
-        ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(ctx).pop(),
+                child: const Text('Cancel'),
+              ),
+              FilledButton(
+                onPressed: selected.isEmpty
+                    ? null
+                    : () {
+                        for (final name in selected) {
+                          onAddManualItem(GutHealthItemOB(
+                            name: name,
+                            category: manualItemOptions[name]!.category,
+                            dateTime: DateTime.now(),
+                            isAutoFlagged: false,
+                          ));
+                        }
+                        Navigator.of(ctx).pop();
+                      },
+                child: Text('Log ${selected.isEmpty ? '' : '(${selected.length})'}'),
+              ),
+            ],
+          );
+        },
       ),
     );
   }
