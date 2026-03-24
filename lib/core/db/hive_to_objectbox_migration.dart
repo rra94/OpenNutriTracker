@@ -17,8 +17,7 @@ class HiveToObjectBoxMigration {
   static final _log = Logger('HiveToObjectBoxMigration');
 
   static Future<bool> needsMigration(ObjectBoxDBProvider obProvider) async {
-    final configBox = obProvider.configBox;
-    final configs = configBox.getAll();
+    final configs = obProvider.configBox.getAll();
     if (configs.isEmpty) return true;
     return !configs.first.hiveMigrationComplete;
   }

@@ -8,26 +8,28 @@ import 'package:opennutritracker/core/db/entities/user_ob.dart';
 import 'package:opennutritracker/objectbox.g.dart';
 
 class UserDataSourceOB {
-  /// We store a single UserOB row; this constant is used as the fixed OB id.
-  static const int _singletonId = 1;
-
   final log = Logger('UserDataSourceOB');
   final Box<UserOB> _userBox;
 
   UserDataSourceOB(this._userBox);
 
+  UserOB? _getUser() {
+    final all = _userBox.getAll();
+    return all.isEmpty ? null : all.first;
+  }
+
   Future<void> saveUserData(UserDBO userDBO) async {
     log.fine('Updating user in db');
     final ob = _userDBOToOB(userDBO);
-    ob.id = _singletonId;
+    final existing = _getUser();
+    if (existing != null) ob.id = existing.id;
     _userBox.put(ob);
   }
 
-  Future<bool> hasUserData() async => _userBox.get(_singletonId) != null;
+  Future<bool> hasUserData() async => _getUser() != null;
 
-  // TODO remove dummy data
   Future<UserDBO> getUserData() async {
-    final ob = _userBox.get(_singletonId);
+    final ob = _getUser();
     return ob != null
         ? _userOBToDBO(ob)
         : UserDBO(
