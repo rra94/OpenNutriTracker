@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:logging/logging.dart';
-import 'package:opennutritracker/core/data/data_source/user_data_source.dart';
+import 'package:opennutritracker/core/db/data_sources/user_data_source_ob.dart';
 import 'package:opennutritracker/core/data/repository/config_repository.dart';
 import 'package:opennutritracker/core/domain/entity/app_theme_entity.dart';
 import 'package:opennutritracker/core/presentation/main_screen.dart';
@@ -30,7 +30,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   LoggerConfig.intiLogger();
   await initLocator();
-  final isUserInitialized = await locator<UserDataSource>().hasUserData();
+  final isUserInitialized = await locator<UserDataSourceOB>().hasUserData();
   final configRepo = locator<ConfigRepository>();
   final hasAcceptedAnonymousData =
       await configRepo.getConfigHasAcceptedAnonymousData();

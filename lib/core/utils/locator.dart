@@ -1,11 +1,13 @@
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:get_it/get_it.dart';
-import 'package:opennutritracker/core/data/data_source/config_data_source.dart';
-import 'package:opennutritracker/core/data/data_source/intake_data_source.dart';
 import 'package:opennutritracker/core/data/data_source/physical_activity_data_source.dart';
-import 'package:opennutritracker/core/data/data_source/tracked_day_data_source.dart';
-import 'package:opennutritracker/core/data/data_source/user_activity_data_source.dart';
-import 'package:opennutritracker/core/data/data_source/user_data_source.dart';
+import 'package:opennutritracker/core/db/data_sources/config_data_source_ob.dart';
+import 'package:opennutritracker/core/db/data_sources/intake_data_source_ob.dart';
+import 'package:opennutritracker/core/db/data_sources/tracked_day_data_source_ob.dart';
+import 'package:opennutritracker/core/db/data_sources/user_activity_data_source_ob.dart';
+import 'package:opennutritracker/core/db/data_sources/user_data_source_ob.dart';
+import 'package:opennutritracker/core/db/hive_to_objectbox_migration.dart';
+import 'package:opennutritracker/core/db/objectbox_db_provider.dart';
 import 'package:opennutritracker/core/data/repository/config_repository.dart';
 import 'package:opennutritracker/core/data/repository/intake_repository.dart';
 import 'package:opennutritracker/core/data/repository/physical_activity_repository.dart';
@@ -62,11 +64,23 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 final locator = GetIt.instance;
 
 Future<void> initLocator() async {
-  // Init secure storage and Hive database;
+  // Init secure storage and Hive database (kept for migration)
   final secureAppStorageProvider = SecureAppStorageProvider();
   final hiveDBProvider = HiveDBProvider();
   await hiveDBProvider
       .initHiveDB(await secureAppStorageProvider.getHiveEncryptionKey());
+
+  // Init ObjectBox database
+  final objectBoxProvider = ObjectBoxDBProvider();
+  await objectBoxProvider.init();
+
+  // Run Hive → ObjectBox migration if needed
+  if (await HiveToObjectBoxMigration.needsMigration(objectBoxProvider)) {
+    await HiveToObjectBoxMigration.migrate(
+      hiveProvider: hiveDBProvider,
+      obProvider: objectBoxProvider,
+    );
+  }
 
   // Backend
   await Supabase.initialize(
@@ -171,27 +185,29 @@ Future<void> initLocator() async {
   locator.registerLazySingleton<TrackedDayRepository>(
       () => TrackedDayRepository(locator()));
 
-  // DataSources
-  locator
-      .registerLazySingleton(() => ConfigDataSource(hiveDBProvider.configBox));
-  locator.registerLazySingleton<UserDataSource>(
-      () => UserDataSource(hiveDBProvider.userBox));
-  locator.registerLazySingleton<IntakeDataSource>(
-      () => IntakeDataSource(hiveDBProvider.intakeBox));
-  locator.registerLazySingleton<UserActivityDataSource>(
-      () => UserActivityDataSource(hiveDBProvider.userActivityBox));
+  // DataSources (ObjectBox-backed)
+  locator.registerLazySingleton<ConfigDataSourceOB>(
+      () => ConfigDataSourceOB(objectBoxProvider.configBox));
+  locator.registerLazySingleton<UserDataSourceOB>(
+      () => UserDataSourceOB(objectBoxProvider.userBox));
+  locator.registerLazySingleton<IntakeDataSourceOB>(
+      () => IntakeDataSourceOB(objectBoxProvider.intakeBox));
+  locator.registerLazySingleton<UserActivityDataSourceOB>(
+      () => UserActivityDataSourceOB(objectBoxProvider.userActivityBox));
+  locator.registerLazySingleton<TrackedDayDataSourceOB>(
+      () => TrackedDayDataSourceOB(objectBoxProvider.trackedDayBox));
+
+  // DataSources (non-DB, unchanged)
   locator.registerLazySingleton<PhysicalActivityDataSource>(
       () => PhysicalActivityDataSource());
   locator.registerLazySingleton<OFFDataSource>(() => OFFDataSource());
   locator.registerLazySingleton<FDCDataSource>(() => FDCDataSource());
   locator.registerLazySingleton<SpFdcDataSource>(() => SpFdcDataSource());
-  locator.registerLazySingleton(
-      () => TrackedDayDataSource(hiveDBProvider.trackedDayBox));
 
-  await _initializeConfig(locator());
+  await _initializeConfig(locator<ConfigDataSourceOB>());
 }
 
-Future<void> _initializeConfig(ConfigDataSource configDataSource) async {
+Future<void> _initializeConfig(ConfigDataSourceOB configDataSource) async {
   if (!await configDataSource.configInitialized()) {
     configDataSource.initializeConfig();
   }

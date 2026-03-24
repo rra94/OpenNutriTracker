@@ -1,0 +1,37 @@
+import 'package:objectbox/objectbox.dart';
+
+@Entity()
+class ConfigOB {
+  @Id()
+  int id = 0;
+
+  bool hasAcceptedDisclaimer;
+  bool hasAcceptedPolicy;
+  bool hasAcceptedSendAnonymousData;
+
+  /// 0=light, 1=dark, 2=system
+  int selectedAppTheme;
+
+  bool? usesImperialUnits;
+  double? userKcalAdjustment;
+  double? userCarbGoalPct;
+  double? userProteinGoalPct;
+  double? userFatGoalPct;
+
+  /// Flag indicating whether data has been migrated from Hive to ObjectBox.
+  bool hiveMigrationComplete;
+
+  ConfigOB({
+    this.id = 0,
+    this.hasAcceptedDisclaimer = false,
+    this.hasAcceptedPolicy = false,
+    this.hasAcceptedSendAnonymousData = false,
+    this.selectedAppTheme = 2,
+    this.usesImperialUnits,
+    this.userKcalAdjustment,
+    this.userCarbGoalPct,
+    this.userProteinGoalPct,
+    this.userFatGoalPct,
+    this.hiveMigrationComplete = false,
+  });
+}

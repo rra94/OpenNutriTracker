@@ -1,11 +1,11 @@
-import 'package:opennutritracker/core/data/data_source/intake_data_source.dart';
+import 'package:opennutritracker/core/db/data_sources/intake_data_source_ob.dart';
 import 'package:opennutritracker/core/data/dbo/intake_dbo.dart';
 import 'package:opennutritracker/core/data/dbo/intake_type_dbo.dart';
 import 'package:opennutritracker/core/domain/entity/intake_entity.dart';
 import 'package:opennutritracker/core/domain/entity/intake_type_entity.dart';
 
 class IntakeRepository {
-  final IntakeDataSource _intakeDataSource;
+  final IntakeDataSourceOB _intakeDataSource;
 
   IntakeRepository(this._intakeDataSource);
 
